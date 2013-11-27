@@ -40,11 +40,12 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
  
+ 	<!-- Scan to Export XML node -->
  	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">  
 		<property name="packagesToScan">  
 			<list> 
-				<value>com.wdxxl.model</value>  
-				<value>com.wdxxl.xmlData</value>  
+				<value>com.wdxxl.derbyLookup.model</value>  
+				<value>com.wdxxl.derbyLookup.xml</value>  
 			</list>
 		</property>  
 	</bean>  
@@ -66,10 +67,10 @@
 	</bean>
  
  	<!-- Component Scan to service -->
-	<context:component-scan base-package="com.wdxxl.service"/>
+	<context:component-scan base-package="com.wdxxl.derbyLookup.service"/>
 	
 	<!-- Component Scan to Controller -->
-	<context:component-scan base-package="com.wdxxl.controller" >
+	<context:component-scan base-package="com.wdxxl.derbyLookup.controller" >
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/> 
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/> 
 	</context:component-scan>

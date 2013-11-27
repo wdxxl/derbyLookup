@@ -2,12 +2,14 @@ package com.wdxxl.derbyLookup.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
  * The persistent class for the DERBYLOOKUP database table.
- * 
+ * @XmlRootElement for generate XML results
  */
+@XmlRootElement
 @Entity
 public class Derbylookup implements Serializable {
 	private static final long serialVersionUID = 1L;
