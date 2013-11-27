@@ -45,7 +45,7 @@
 	
 	<tx:annotation-driven transaction-manager="txManager" />
 	
-	<!-- Properties file Load -->
+	<!-- Properties file Load uesd in testCase and web.xml -->
 	<beans profile="dev">
 		<context:property-placeholder ignore-resource-not-found="true" location="classpath:db.dev.properties" />
 	</beans>

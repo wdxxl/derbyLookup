@@ -14,6 +14,33 @@
         http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 	
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="favorPathExtension" value="true" /><!-- /derbyLookup/getDerbyLookup.json -->
+		<property name="favorParameter" value="true" />
+		<property name="parameterName" value="format" /><!-- /derbyLookup/getDerbyLookup?format=json -->
+		<property name="ignoreAcceptHeader" value="false" /><!-- Accept: application/xml -->
+		<property name="useJaf" value="false" />
+		<property name="defaultContentType" value="application/json" /> <!-- postman have difference with soapui -->
+
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+			</map>
+		</property>
+	</bean>
+ 
+	<!-- Scan to Export XML node -->
+ 	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">  
+		<property name="packagesToScan">  
+			<list> 
+				<value>com.wdxxl.derbyLookup.model</value>  
+				<value>com.wdxxl.derbyLookup.xml</value>  
+			</list>
+		</property>  
+	</bean>
+	
     <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
 		<mvc:message-converters register-defaults="false">
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -39,33 +66,9 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
- 
- 	<!-- Scan to Export XML node -->
- 	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">  
-		<property name="packagesToScan">  
-			<list> 
-				<value>com.wdxxl.derbyLookup.model</value>  
-				<value>com.wdxxl.derbyLookup.xml</value>  
-			</list>
-		</property>  
-	</bean>  
-	<bean id="contentNegotiationManager"
-		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
-		<property name="favorPathExtension" value="true" />
-		<property name="favorParameter" value="true" />
-		<property name="parameterName" value="format" />
-		<property name="ignoreAcceptHeader" value="false" />
-		<property name="useJaf" value="false" />
-		<property name="defaultContentType" value="application/json" /> <!-- postman have difference with soapui -->
-
-		<property name="mediaTypes">
-			<map>
-				<entry key="json" value="application/json" />
-				<entry key="xml" value="application/xml" />
-			</map>
-		</property>
-	</bean>
- 
+   
+	
+	
  	<!-- Component Scan to service -->
 	<context:component-scan base-package="com.wdxxl.derbyLookup.service"/>
 	
